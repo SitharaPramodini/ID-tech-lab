@@ -1,75 +1,83 @@
 import {
-    RxDiscordLogo,
-    RxGithubLogo,
-    RxInstagramLogo,
-    RxTwitterLogo,
-    RxLinkedinLogo,
-  } from "react-icons/rx";
-  
-  import { FaYoutube } from "react-icons/fa";
-  
-  const Footer = () => {
-    return (
-      <div className="w-full h-full bg-transparent text-gray-200 shadow-lg p-[15px]">
-        <div className="w-full flex flex-col items-center justify-center m-auto">
-          {/* <div className="w-full h-full flex flex-row items-center justify-around flex-wrap">
-            
-            // Community Section
-            <div className="min-w-[200px] h-auto flex flex-col items-center justify-start">
-              <div className="font-bold text-[16px]">Community</div>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <FaYoutube />
-                <span className="text-[15px] ml-[6px]">Youtube</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <RxGithubLogo />
-                <span className="text-[15px] ml-[6px]">Github</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <RxDiscordLogo />
-                <span className="text-[15px] ml-[6px]">Discord</span>
-              </p>
-            </div>
-  
-            //  Social Media Section
-            <div className="min-w-[200px] h-auto flex flex-col items-center justify-start">
-              <div className="font-bold text-[16px]">Social Media</div>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <RxInstagramLogo />
-                <span className="text-[15px] ml-[6px]">Instagram</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <RxTwitterLogo />
-                <span className="text-[15px] ml-[6px]">Twitter</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <RxLinkedinLogo />
-                <span className="text-[15px] ml-[6px]">LinkedIn</span>
-              </p>
-            </div>
-  
-            // About Section
-            <div className="min-w-[200px] h-auto flex flex-col items-center justify-start">
-              <div className="font-bold text-[16px]">About</div>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <span className="text-[15px] ml-[6px]">Become Sponsor</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <span className="text-[15px] ml-[6px]">Learning about me</span>
-              </p>
-              <p className="flex flex-row items-center my-[15px] cursor-pointer">
-                <span className="text-[15px] ml-[6px]">mifwebchain@gmail.com</span>
-              </p>
-            </div>
-          </div> */}
-  
-          <div className="mb-[20px] text-[15px] text-center">
-            &copy; 2025 Sithara. All rights reserved
-          </div>
+  RxDiscordLogo,
+  RxGithubLogo,
+  RxInstagramLogo,
+  RxTwitterLogo,
+  RxLinkedinLogo,
+} from "react-icons/rx";
+
+import { FaYoutube } from "react-icons/fa";
+
+const Footer = () => {
+  const socialLinks = [
+    {
+      icon: RxGithubLogo,
+      href: "https://github.com/yourcompany",
+      label: "GitHub",
+      hoverColor: "hover:text-gray-300"
+    },
+    {
+      icon: RxLinkedinLogo,
+      href: "https://linkedin.com/company/yourcompany",
+      label: "LinkedIn", 
+      hoverColor: "hover:text-blue-400"
+    },
+    {
+      icon: RxTwitterLogo,
+      href: "https://twitter.com/yourcompany",
+      label: "Twitter",
+      hoverColor: "hover:text-sky-400"
+    },
+    {
+      icon: RxInstagramLogo,
+      href: "https://instagram.com/yourcompany",
+      label: "Instagram",
+      hoverColor: "hover:text-pink-400"
+    },
+    {
+      icon: FaYoutube,
+      href: "https://youtube.com/@yourcompany",
+      label: "YouTube",
+      hoverColor: "hover:text-red-400"
+    },
+    {
+      icon: RxDiscordLogo,
+      href: "https://discord.gg/yourcompany",
+      label: "Discord",
+      hoverColor: "hover:text-indigo-400"
+    }
+  ];
+
+  return (
+    <div className="w-full h-full bg-transparent text-gray-200 shadow-lg p-[15px]">
+      <div className="w-full flex flex-col items-center justify-center m-auto">
+        
+        {/* Social Media Links */}
+        <div className="flex items-center justify-center space-x-6 mb-6">
+          {socialLinks.map((social, index) => {
+            const IconComponent = social.icon;
+            return (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-gray-400 ${social.hoverColor} transition-colors duration-300 transform hover:scale-110`}
+                aria-label={social.label}
+              >
+                <IconComponent size={24} />
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Copyright */}
+        <div className="text-[15px] text-center text-gray-400">
+          &copy; 2025 ID-TechLabs. All rights reserved
         </div>
       </div>
-    );
-  };
-  
-  export default Footer;
-  
+    </div>
+  );
+};
+
+export default Footer;

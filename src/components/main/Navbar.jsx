@@ -19,21 +19,23 @@ const Navbar = () => {
             height={70}
             className="cursor-pointer hover:animate-spin"
           /> */}
-          <span className="font-bold ml-[10px] hidden md:block text-gray-300">
-            SITHARA
+          <span className="flex flex-row items-center font-bold ml-[10px] text-gray-300">
+            <img src="logo3.png" className="w-16"/> 
+            <p>TechLabs</p>
           </span>
         </a>
 
         <div className="w-[500px] h-full flex flex-row items-center justify-between md:mr-20">
           <div className="flex items-center justify-between w-full h-auto border border-[#7042f861] bg-[#0300145e] mr-[15px] px-[20px] py-[10px] rounded-full text-gray-200">
-            <a href="#about-me" className="cursor-pointer">Home</a>
-            <a href="#about-me" className="cursor-pointer">About</a>
-            <a href="#skills" className="cursor-pointer">Services</a>
-            <a href="#projects" className="cursor-pointer">Solutions</a>
+            <a href="#home" className="cursor-pointer">Home</a>
+            <a href="#about" className="cursor-pointer">About</a>
+            <a href="#services" className="cursor-pointer">Services</a>
+            <a href="#contact" className="cursor-pointer">Contact</a>
           </div>
         </div>
 
         <div className="flex flex-row gap-5">
+          <a href="#contact">
           {Socials.map((social) => (
             <img
               src={social.src}
@@ -44,6 +46,7 @@ const Navbar = () => {
               className="cursor-pointer"
             />
           ))}
+          </a>
         </div>
       </div>
     </div>

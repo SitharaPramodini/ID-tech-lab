@@ -4,9 +4,10 @@ import StarsCanvas from "./components/main/StarBackground";
 import Navbar from "./components/main/Navbar";
 import Footer from "./components/main/Footer";
 import Hero from "./components/main/Hero";
-import Skills from "./components/main/Skills";
-import Encription from "./components/main/Encryption";
+import ContactPage from "./components/main/ContactPage";
+import About from "./components/main/About";
 import Projects from "./components/main/Projects";
+import ServicesPage from "./components/main/ServicesPage";
 
 
 function App() {
@@ -18,10 +19,11 @@ function App() {
       {/* Replace with your routing or content */}
       <main>
       <Hero />
-      <Encription />
-      <Skills />
+      <About />
+      <ServicesPage />
+      <ContactPage />
       
-      <Projects />
+      {/* <Projects /> */}
         {/* Example: <Routes> ... </Routes> or <Home /> */}
       </main>
       

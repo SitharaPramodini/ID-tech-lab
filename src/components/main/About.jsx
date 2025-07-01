@@ -7,7 +7,7 @@ import { slideInFromTop, slideInFromLeft } from "../../../utils/motion";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-const Encryptions = () => {
+const About = () => {
   const containerRef = useRef(null);
   const headerRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -17,25 +17,25 @@ const Encryptions = () => {
 
   const teamMembers = [
     {
-      name: "Alex Thompson",
+      name: "Iroshan Madhusanka",
       role: "CEO & Full-Stack Developer",
-      image: "/team-member-1.png",
+      image: "iro.jpg",
       description: "Visionary leader with 8+ years in software development. Specializes in scalable architecture and team management.",
       skills: ["Leadership", "Full-Stack", "Architecture", "Strategy"],
       delay: 0.5
     },
     {
-      name: "Sarah Chen",
+      name: "Dasuni Uthpala",
       role: "CTO & Backend Specialist",
-      image: "/team-member-2.png", 
+      image: "dasu.jpg", 
       description: "Expert in cloud infrastructure and database optimization. Passionate about building robust, secure systems.",
       skills: ["Cloud", "DevOps", "Database", "Security"],
       delay: 0.7
     },
     {
-      name: "Marcus Rodriguez",
+      name: "Sithara Pramodini",
       role: "Lead Frontend Developer",
-      image: "/team-member-3.png",
+      image: "sithara.jpeg",
       description: "UI/UX enthusiast with expertise in React.js and modern web technologies. Creates stunning user experiences.",
       skills: ["React", "UI/UX", "Animation", "Mobile"],
       delay: 0.9
@@ -228,7 +228,7 @@ const Encryptions = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden">
+    <div ref={containerRef} id="about" className="relative overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="floating-element absolute top-20 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl"></div>
@@ -340,7 +340,7 @@ const Encryptions = () => {
             </div>
             
             <div className="text-center">
-              <div className="stat-number text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500" data-value="3">
+              <div className="stat-number text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500" data-value="5">
                 0
               </div>
               <div className="text-gray-400 text-sm">Years Experience</div>
@@ -359,4 +359,4 @@ const Encryptions = () => {
   );
 };
 
-export default Encryptions;
+export default About;
