@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.css";
-import StarsCanvas from "./components/main/StarBackground";
 import Navbar from "./components/main/Navbar";
 import Footer from "./components/main/Footer";
 import Hero from "./components/main/Hero";
