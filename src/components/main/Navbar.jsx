@@ -1,52 +1,112 @@
-import React from "react";
+import { useState } from "react";
 import { Socials } from "../../index"; // Adjust this if your path differs
-// import NavLogo from "/NavLogo.png"; // optional if you want to use logo
-// import SocialIcon from "/icon.png"; // fallback or default icon if needed
+
+const NAV_LINKS = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#contact", label: "Contact" },
+];
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md z-50 px-10">
-      <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[10px]">
-        <a
-          href="#about-me"
-          className="h-auto w-auto flex flex-row items-center"
-        >
-          {/* Uncomment and update if using logo */}
-          {/* <img
-            src={NavLogo}
-            alt="logo"
-            width={70}
-            height={70}
-            className="cursor-pointer hover:animate-spin"
-          /> */}
-          <span className="flex flex-row items-center font-bold ml-[10px] text-gray-300">
-            <img src="logo3.png" className="w-16"/> 
-            <p>TechLabs</p>
-          </span>
+    <div className="w-full h-[65px] fixed top-0 border-b border-brand-500/20 shadow-lg shadow-[#b80000]/30 bg-[#05050559] backdrop-blur-md z-50 px-4 sm:px-6 lg:px-10">
+      <div className="w-full h-full flex flex-row items-center justify-between m-auto">
+        <a href="#home" className="flex flex-row items-center shrink-0">
+          <img
+            src="logo-transparent.png"
+            alt="IDTechLabs"
+            className="w-9 sm:w-11"
+          />
+          <p className="ml-2 font-bold text-gray-100 tracking-tight text-sm sm:text-base">
+            <span className="text-brand-500">ID</span>TechLabs
+          </p>
         </a>
 
-        <div className="w-[500px] h-full flex flex-row items-center justify-between md:mr-20">
-          <div className="flex items-center justify-between w-full h-auto border border-[#7042f861] bg-[#0300145e] mr-[15px] px-[20px] py-[10px] rounded-full text-gray-200">
-            <a href="#home" className="cursor-pointer">Home</a>
-            <a href="#about" className="cursor-pointer">About</a>
-            <a href="#services" className="cursor-pointer">Services</a>
-            <a href="#contact" className="cursor-pointer">Contact</a>
-          </div>
+        {/* Desktop navigation */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-10 border border-[#ff1a1a4d] bg-[#0a0a0a8c] px-6 lg:px-8 py-2.5 rounded-full text-gray-200">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="cursor-pointer hover:text-brand-400 transition-colors duration-300"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
-        <div className="flex flex-row gap-5">
+        <div className="hidden md:flex flex-row gap-5">
           <a href="#contact">
-          {Socials.map((social) => (
-            <img
-              src={social.src}
-              alt={social.name}
-              key={social.name}
-              width={24}
-              height={24}
-              className="cursor-pointer"
-            />
-          ))}
+            {Socials.map((social) => (
+              <img
+                src={social.src}
+                alt={social.name}
+                key={social.name}
+                width={24}
+                height={24}
+                className="cursor-pointer"
+              />
+            ))}
           </a>
+        </div>
+
+        {/* Mobile menu toggle */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-brand-500/30 text-gray-100 hover:border-brand-500/60 transition-colors duration-300"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            {menuOpen ? (
+              <>
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="7" x2="21" y2="7" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="17" x2="21" y2="17" />
+              </>
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile navigation panel */}
+      <div
+        id="mobile-menu"
+        className={`md:hidden absolute left-0 top-[65px] w-full origin-top bg-ink-950/95 backdrop-blur-md border-b border-brand-500/20 transition-all duration-300 ${
+          menuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-3 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col px-5 py-2">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="py-3 border-b border-white/5 last:border-b-0 text-gray-200 hover:text-brand-400 transition-colors duration-300"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ const Footer = () => {
       icon: RxDiscordLogo,
       href: "https://discord.gg/yourcompany",
       label: "Discord",
-      hoverColor: "hover:text-indigo-400"
+      hoverColor: "hover:text-brand-400"
     }
   ];
 
@@ -53,7 +53,7 @@ const Footer = () => {
       <div className="w-full flex flex-col items-center justify-center m-auto">
         
         {/* Social Media Links */}
-        <div className="flex items-center justify-center space-x-6 mb-6">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-4">
           {socialLinks.map((social, index) => {
             const IconComponent = social.icon;
             return (
@@ -62,7 +62,7 @@ const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-400 ${social.hoverColor} transition-colors duration-300 transform hover:scale-110`}
+                className={`p-2 text-gray-400 ${social.hoverColor} transition-colors duration-300 transform hover:scale-110`}
                 aria-label={social.label}
               >
                 <IconComponent size={24} />

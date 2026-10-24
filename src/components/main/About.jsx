@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { slideInFromTop, slideInFromLeft } from "../../../utils/motion";
+import PuzzleBackdrop from "../sub/PuzzleBackdrop";
+import PuzzlePiece from "../sub/PuzzlePiece";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -17,27 +19,27 @@ const About = () => {
 
   const teamMembers = [
     {
-      name: "Iroshan Madhusanka",
-      role: "CEO & Full-Stack Developer",
+      name: "Iroshan Us Liyanage",
+      role: "Founder & CEO",
       image: "iro.jpg",
-      description: "Visionary leader with 8+ years in software development. Specializes in scalable architecture and team management.",
-      skills: ["Leadership", "Full-Stack", "Architecture", "Strategy"],
+      description: "As Founder & CEO, Iroshan focuses on building our company's vision, driving business growth, and delivering innovative technology solutions. With a background in networking and business management, Iroshan combines technical expertise with business strategy to create meaningful value for our clients.",
+      skills: ["Leadership", "Networking", "Business Strategy", "Growth"],
       delay: 0.5
     },
     {
-      name: "Dasuni Uthpala",
-      role: "CTO & Backend Specialist",
-      image: "dasu.jpg", 
-      description: "Expert in cloud infrastructure and database optimization. Passionate about building robust, secure systems.",
-      skills: ["Cloud", "DevOps", "Database", "Security"],
+      name: "Dasuni Wickramasinghe",
+      role: "Co-Founder & Head of Engineering",
+      image: "dasu.jpg",
+      description: "As Co-Founder & Head of Engineering, Dasuni leads the company's technology vision across software development, cloud computing, and AI-powered solutions, with a focus on building scalable, reliable software that solves real-world problems and drives business growth.",
+      skills: ["Software Engineering", "Cloud", "AI Solutions", "Architecture"],
       delay: 0.7
     },
     {
       name: "Sithara Pramodini",
-      role: "Lead Frontend Developer",
+      role: "Lead Full-Stack Developer",
       image: "sithara.jpeg",
-      description: "UI/UX enthusiast with expertise in React.js and modern web technologies. Creates stunning user experiences.",
-      skills: ["React", "UI/UX", "Animation", "Mobile"],
+      description: "As Lead Full-Stack Developer, Sithara builds applications end to end — from clean, responsive interfaces to the APIs and data layers behind them — turning product ideas into polished, production-ready software that teams can rely on.",
+      skills: ["React", "Node.js", "UI/UX", "APIs"],
       delay: 0.9
     }
   ];
@@ -168,7 +170,15 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  // Hover reveals are desktop-only: a touch device has no hover, so the content
+  // stays visible via CSS instead and GSAP must not write inline opacity over it.
+  const isHoverDevice = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 1024px) and (hover: hover)").matches;
+
   const handleCardHover = (e, isEntering) => {
+    if (!isHoverDevice()) return;
+
     const card = e.currentTarget;
     const image = card.querySelector('.member-image');
     const content = card.querySelector('.member-content');
@@ -229,31 +239,26 @@ const About = () => {
 
   return (
     <div ref={containerRef} id="about" className="relative overflow-hidden">
-      {/* Floating background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="floating-element absolute top-20 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl"></div>
-        <div className="floating-element absolute top-40 right-20 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl"></div>
-        <div className="floating-element absolute bottom-40 left-1/4 w-40 h-40 bg-purple-500/5 rounded-full blur-2xl"></div>
-      </div>
+      <PuzzleBackdrop floatClass="floating-element" />
 
       <motion.div
         initial="hidden"
         animate="visible"
         className="relative z-10"
       >
-        <div className="pt-36 flex flex-col relative items-center justify-start min-h-screen w-full h-full px-20">
+        <div className="pt-28 sm:pt-32 lg:pt-36 flex flex-col relative items-center justify-start min-h-screen w-full h-full px-5 sm:px-8 lg:px-20">
           
           {/* Header Section */}
           <div ref={headerRef} className="w-full text-center">
-            <div className="text-[60px] font-medium text-gray-200 mb-6">
+            <div className="text-4xl sm:text-5xl lg:text-[60px] font-medium text-gray-200 mb-6">
               About
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700">
                 {" "} Our Company{" "}
               </span>
             </div>
           </div>
           
-          <div ref={descriptionRef} className="text-white text-lg leading-8 max-w-4xl mx-auto mb-12 text-center">
+          <div ref={descriptionRef} className="text-white text-base sm:text-lg leading-7 sm:leading-8 max-w-4xl mx-auto mb-12 text-center">
             We are an innovative IT company specializing in custom software development, 
             web applications, and digital solutions. Our mission is to transform businesses 
             through cutting-edge technology and exceptional user experiences. From concept 
@@ -262,19 +267,20 @@ const About = () => {
           </div>
 
           {/* Team Members Section */}
-          <div ref={cardsRef} className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div ref={cardsRef} className="w-full max-w-5xl mx-auto sm:px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 mb-20">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="team-card relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 cursor-pointer overflow-hidden"
+                className="team-card relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-brand-500/20 rounded-xl p-5 cursor-pointer overflow-hidden"
                 onMouseEnter={(e) => handleCardHover(e, true)}
                 onMouseLeave={(e) => handleCardHover(e, false)}
               >
                 {/* Card overlay */}
-                <div className="card-overlay absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 pointer-events-none"></div>
+                <div className="card-overlay absolute inset-0 bg-gradient-to-br from-brand-500/10 to-brand-700/10 opacity-0 pointer-events-none"></div>
+                <PuzzlePiece className="absolute -bottom-4 -right-4 w-20 h-20 text-brand-500/[0.07] rotate-12 pointer-events-none" />
                 
                 <div className="member-content flex flex-col items-center text-center relative z-10">
-                  <div className="w-32 h-32 mb-4 rounded-full overflow-hidden border-2 border-purple-500/30">
+                  <div className="w-24 h-24 mb-3 rounded-full overflow-hidden border-2 border-brand-500/40">
                     <img
                       src={member.image}
                       alt={member.name}
@@ -285,24 +291,24 @@ const About = () => {
                     />
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-base font-semibold text-white mb-1">
                     {member.name}
                   </h3>
-                  
-                  <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-medium mb-4">
+
+                  <div className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600 text-sm font-medium mb-3">
                     {member.role}
                   </div>
-                  
-                  <p className="text-gray-300 text-sm leading-6 mb-4">
+
+                  <p className="text-gray-300 text-[13px] leading-5 mb-4">
                     {member.description}
                   </p>
 
                   {/* Skills tags */}
-                  <div className="member-skills opacity-0 flex flex-wrap gap-2 justify-center">
+                  <div className="member-skills opacity-100 lg:opacity-0 flex flex-wrap gap-2 justify-center">
                     {member.skills.map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
-                        className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-white text-xs rounded-full border border-purple-500/30"
+                        className="px-2.5 py-0.5 bg-gradient-to-r from-brand-500/20 to-brand-700/20 text-white text-[11px] rounded-full border border-brand-500/30"
                       >
                         {skill}
                       </span>
@@ -313,44 +319,46 @@ const About = () => {
             ))}
           </div>
 
+          <div className="puzzle-seam w-full max-w-3xl mb-14" />
+
           {/* Call to Action */}
-          <div ref={buttonsRef} className="flex gap-4 mb-16">
+          <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto px-4 sm:px-0">
             <a
-              className="cta-button py-3 px-12 bg-gradient-to-r from-purple-500 to-cyan-500 text-center text-white cursor-pointer rounded-lg hover:from-purple-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+              className="cta-button py-3 px-8 sm:px-12 bg-gradient-to-r from-brand-500 to-brand-700 text-center text-white cursor-pointer rounded-lg hover:from-brand-600 hover:to-brand-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-brand-500/25"
               href="#contact"
             >
               Get In Touch
             </a>
             
             <a
-              className="cta-button py-3 px-12 border border-purple-500/50 text-center text-white cursor-pointer rounded-lg hover:border-purple-500 hover:bg-purple-500/10 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
-              href="#portfolio"
+              className="cta-button py-3 px-8 sm:px-12 border border-brand-500/50 text-center text-white cursor-pointer rounded-lg hover:border-brand-500 hover:bg-brand-500/10 transition-all duration-300 hover:shadow-lg hover:shadow-brand-700/25"
+              href="#services"
             >
               View Our Work
             </a>
           </div>
 
           {/* Company Stats */}
-          <div ref={statsRef} className="w-full grid grid-cols-3 gap-8 max-w-2xl">
+          <div ref={statsRef} className="w-full grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl">
             <div className="text-center">
-              <div className="stat-number text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500" data-value="50">
+              <div className="stat-number text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700" data-value="18">
                 0
               </div>
-              <div className="text-gray-400 text-sm">Projects Completed</div>
+              <div className="text-gray-400 text-xs sm:text-sm">Projects Completed</div>
             </div>
-            
+
             <div className="text-center">
-              <div className="stat-number text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500" data-value="5">
+              <div className="stat-number text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700" data-value="5">
                 0
               </div>
-              <div className="text-gray-400 text-sm">Years Experience</div>
+              <div className="text-gray-400 text-xs sm:text-sm">Years Experience</div>
             </div>
-            
+
             <div className="text-center">
-              <div className="stat-number text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500" data-value="100">
+              <div className="stat-number text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700" data-value="10">
                 0
               </div>
-              <div className="text-gray-400 text-sm">Client Satisfaction</div>
+              <div className="text-gray-400 text-xs sm:text-sm">Happy Clients</div>
             </div>
           </div>
         </div>

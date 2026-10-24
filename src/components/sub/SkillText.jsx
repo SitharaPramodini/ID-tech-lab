@@ -2,16 +2,16 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { slideInFromLeft, slideInFromTop } from '../../../utils/motion'
-import { SparklesIcon } from '@heroicons/react/24/solid'
+import PuzzlePiece from './PuzzlePiece'
 
 const SkillText = () => {
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
       <motion.div
         variants={slideInFromTop}
-        className="flex items-center py-2 px-3 border border-[#7042f88b] opacity-90 rounded-md"
+        className="flex items-center py-2 px-3 border border-[#ff1a1a66] opacity-90 rounded-md"
       >
-        <SparklesIcon className="text-[#b49bff] mr-2 h-5 w-5" />
+        <PuzzlePiece className="text-[#ff5252] mr-2 h-4 w-4" />
         <h1 className="text-sm text-white">
           Make better with frontend technologies
         </h1>

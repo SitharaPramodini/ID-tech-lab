@@ -11,7 +11,7 @@ import ServicesPage from "./components/main/ServicesPage";
 
 function App() {
   return (
-    <div className="bg-[#030014] overflow-x-hidden font-inter">
+    <div className="bg-ink-950 overflow-x-hidden font-inter">
       {/* <StarsCanvas /> */}
       <Navbar />
       
